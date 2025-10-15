@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical Meat Compliance: The neo safemeat FBO Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Define the AIFS color palette using CSS variables/Tailwind config */
+        :root {
+            --afs-primary: #026848; /* Dark Teal/Green */
+            --afs-accent: #00B293;  /* Accent Green for links/buttons */
+            --afs-secondary-bg: #E6F0E6; /* Light background for sidebars */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'afs-primary': 'var(--afs-primary)',
+                        'afs-accent': 'var(--afs-accent)',
+                        'afs-secondary-bg': 'var(--afs-secondary-bg)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Global typography and color overrides to match Neophyte.ai branding */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #0f1724; /* dark text for readability */
+            background-color: #ffffff;
+        }
+
+        /* Make all headings use the primary brand color */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--afs-primary);
+        }
+
+        /* Links and interactive accents use brand accent */
+        a {
+            color: var(--afs-accent);
+        }
+        a:hover {
+            color: color-mix(in srgb, var(--afs-accent) 80%, black 20%);
+        }
+
+        /* Override common gray utility classes to better match the brand palette */
+        .text-gray-900 { color: #0f1724 !important; }
+        .text-gray-800 { color: #1f2937 !important; }
+        .text-gray-700 { color: #374151 !important; }
+        .text-gray-600 { color: #4b5563 !important; }
+        .text-gray-500 { color: #6b7280 !important; }
+        .text-gray-400 { color: #9ca3af !important; }
+
+        /* Use the soft brand background for subtle panels */
+        .bg-gray-100 { background-color: var(--afs-secondary-bg) !important; }
+
+        /* Buttons and CTAs already use bg-afs-primary/bg-afs-accent via Tailwind config; ensure contrast */
+        .bg-afs-primary, .text-afs-primary { color: #ffffff; }
+
+        /* Small utility to emphasize product names consistently */
+        .product-name { color: var(--afs-primary); font-weight: 700; }
+    </style>
+</head>
+<body class="bg-white font-sans text-gray-800">
+
+    <!-- Header / Navigation Bar -->
+    <header class="shadow-md bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <!-- Logo (Placeholder for Neophyte Logo) -->
+            <a href="/" class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-afs-primary" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- Placeholder for Neophyte AI/Meat Icon -->
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-6h-2v6zm0-8h2V7h-2v2z"/>
+                </svg>
+                <span class="text-2xl font-bold text-gray-900">neo safemeat</span>
+            </a>
+
+            <!-- Desktop Menu (Hidden on mobile) -->
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#" class="hover:text-afs-accent transition duration-150">Platform</a>
+                <a href="#" class="hover:text-afs-accent transition duration-150">Compliance Guides</a>
+                <a href="#" class="hover:text-afs-accent transition duration-150">Training Modules</a>
+                <a href="#" class="hover:text-afs-accent transition duration-150">Resources</a>
+            </nav>
+
+            <!-- CTAs -->
+            <div class="flex items-center space-x-3">
+                <a href="/login" class="px-4 py-2 text-sm font-semibold text-white bg-afs-primary rounded-lg shadow-md hover:bg-opacity-90 transition duration-150">Client Login</a>
+                <a href="/contact" class="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-afs-primary border border-afs-primary rounded-lg hover:bg-afs-primary hover:text-white transition duration-150">Contact Support</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Breadcrumbs -->
+        <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+            <ol class="list-none p-0 inline-flex">
+                <li class="flex items-center">
+                    <a href="/resources" class="hover:text-afs-primary">Neophyte Resource Hub</a>
+                    <svg class="fill-current w-3 h-3 mx-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"/>
+                    </svg>
+                </li>
+                <li><a href="/blog" class="hover:text-afs-primary">Blog</a></li>
+            </ol>
+        </nav>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Column: Main Article -->
+            <main class="lg:w-3/4">
+                <article>
+                    <div class="mb-8">
+                        <h1 class="text-4xl sm:text-5xl font-extrabold text-afs-primary mb-3 leading-tight drop-shadow-sm">
+                            Safe Meat Handling in India: <span class="text-afs-accent">From Mandi to Plate</span>
+                        </h1>
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="inline-block bg-afs-accent/10 text-afs-accent font-semibold px-3 py-1 rounded-full text-xs uppercase tracking-wide">
+                                FSSAI Aligned
+                            </span>
+                            <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs">
+                                Restaurants · Cloud Kitchens · Caterers
+                            </span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-medium text-gray-700 mb-2">
+                            Your essential, actionable roadmap for food businesses—covering every step from sourcing at mandis to safe service on the plate.
+                        </h3>
+                        <p class="text-gray-500 text-sm mb-6 flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-afs-primary mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M6 2a1 1 0 00-1 1v1H5a3 3 0 00-3 3v8a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm8 4a1 1 0 011 1v8a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h10z"/></svg>
+                            <span>October 14, 2025 · India</span>
+                        </p>
+                    </div>
+
+                    <!-- Hero Image Placeholder -->
+                    <div class="mb-8 rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://placehold.co/820x462/026848/ffffff?text=neo+safemeat+Compliance+Platform" alt="Meat safety compliance in a commercial kitchen" class="w-full h-auto object-cover">
+                    </div>
+
+                    <!-- Introduction -->
+                    <p class="text-lg mb-6">
+                        Real-time meat handling control is one of the most critical responsibilities for Food Business Operators (FBOs). From receiving the delivery to the final cooking step, every stage carries a high risk of contamination if not managed using automated protocols.
+                    </p>
+                    <p class="text-lg mb-8">
+                        Following strict <strong>Sentinel AI</strong> procedures helps protect consumers from food-borne illness, ensures your business stays compliant with the <strong>EU Regulation (EC) No 853/2004</strong> standards, and builds trust in your operation.
+                    </p>
+
+                    <!-- Section: Why is it important to handle meat correctly? -->
+                    <h2 class="text-3xl font-bold text-afs-primary mb-4 border-b pb-2">Why is real-time compliance vital?</h2>
+                    <p class="mb-6">
+                        Food-borne illness impacts an estimated <strong>2 million FBOs with non-compliance fines annually</strong> across Europe. Contamination can occur through poor refrigeration, unsafe cooking, or cross-contact with other foods. Under the <strong>EU Regulation (EC) No 853/2004</strong>, businesses are legally obligated to manage high-risk products like meat safely. The <strong>neo safemeat</strong> solution mitigates this risk using Vision and Ambient AI.
+                    </p>
+
+                    <!-- Section: Delivery Acceptance -->
+                    <h2 class="text-2xl font-bold text-gray-700 mb-3 mt-6">Digital QA: Accepting Meat Deliveries (Neo QA)</h2>
+                    <p class="mb-4">
+                        Your compliance journey begins when meat arrives. Accepting unsafe deliveries compromises every subsequent step. Use <strong>Neo QA powered by Neometry</strong> for instant validation:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-6">
+                        <li><strong>Temperature Checks (Ambient AI):</strong> Refrigerated meat must be <strong>&#8804; 5&#176;C</strong>; Frozen meat must be <strong>&#8804; -18&#176;C</strong>.</li>
+                        <li><strong>Vision AI Check:</strong> Reject meat if <strong>Neometry</strong> detects damaged packaging, missing labels, or poor-quality visuals.</li>
+                        <li><strong>Supplier Validation:</strong> Log supplier details and audit certificates using <strong>Neo ICR</strong> directly in the receiving app.</li>
+                    </ul>
+
+                    <!-- Section: Storage & Preparation -->
+                    <h2 class="text-2xl font-bold text-gray-700 mb-3 mt-6">Cold Chain and Cross-Contamination (Sentinel AI)</h2>
+                    <p class="mb-4">
+                        Meat must be stored in conditions that prevent bacterial growth. <strong>Sentinel AI</strong> monitors compliance 24/7:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-6">
+                        <li><strong>Storage:</strong> Raw meat must be stored on the lowest shelf, sealed. <strong>Sentinel AI</strong> ensures refrigeration units remain at or below <strong>&#8804; 5&#176;C</strong>.</li>
+                        <li><strong>Usage Timeline:</strong> Minced or chopped meat must be used within <strong>24 hours</strong>—this timeline is digitally tracked by the system.</li>
+                        <li><strong>Cross-Contamination Prevention:</strong> <strong>Sentinel AI</strong> leverages existing CCTV to detect and log non-compliance related to using separate, dedicated preparation areas and color-coded utensils for raw meat.</li>
+                    </ul>
+
+                    <!-- Section: Defrosting & Cooking -->
+                    <h2 class="text-2xl font-bold text-gray-700 mb-3 mt-6">The Pathogen Kill Step (CCP Validation)</h2>
+                    <p class="mb-4">
+                        Improper defrosting can expose meat to the Danger Zone (<strong>5&#176;C</strong> to <strong>60&#176;C</strong>). Cooking is the final safeguard. Always verify with a digital thermometer and log the data via <strong>CCP Validation (Pocket AI)</strong>.
+                    </p>
+                    <h3 class="text-xl font-semibold mt-4 mb-2">Mandatory Internal Cooking Temperatures:</h3>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-6 font-mono bg-gray-100 p-4 rounded-lg">
+                        <li>Beef, Lamb, Veal (Steaks/Roasts): <strong>63&#176;C</strong> (<strong>3</strong> min rest)</li>
+                        <li>Minced Meat, Sausages, Poultry: <strong>75&#176;C</strong></li>
+                        <li>Pork: <strong>70&#176;C</strong></li>
+                    </ul>
+                    <p class="italic text-sm text-gray-600">Tip: Insert the probe into the thickest part, avoiding bone or fat, to ensure Pocket AI logs an accurate, compliant reading.</p>
+
+                    <!-- Section: Training Staff -->
+                    <h2 class="text-2xl font-bold text-gray-700 mb-3 mt-6">Staff Mastery & Audit Readiness (Intelligence Portal)</h2>
+                    <p class="mb-6">
+                        Your compliance system is only as strong as the staff implementing it. <strong>Neo Retail GPT</strong> and the <strong>Intelligence Portal</strong> ensure workers receive <strong>specialized meat compliance certification</strong> modules and have access to all real-time compliance logs for audit purposes.
+                    </p>
+
+                    <!-- FAQs Section -->
+                    <h2 class="text-3xl font-bold text-afs-primary mb-4 mt-8 border-b pb-2">Frequently Asked Questions</h2>
+                    <div class="space-y-4">
+                        <div class="border p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-700">Q. What temperature should meat be stored at per EU 853/2004?</h3>
+                            <p class="mt-1 text-gray-600">A. Refrigerated meat must be kept at <strong>&#8804; 5&#176;C</strong>, and frozen meat at <strong>&#8804; -18&#176;C</strong>.</p>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-700">Q. Can I refreeze defrosted meat?</h3>
+                            <p class="mt-1 text-gray-600">A. <strong>Yes</strong>, provided it was defrosted safely in the fridge (using <strong>Sentinel AI</strong> logged data) and has not risen above <strong>&#8804; 5&#176;C</strong>.</p>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-700">Q. How do neo safemeat products ensure zero cross-contamination?</h3>
+                            <p class="mt-1 text-gray-600">A. <strong>Sentinel AI</strong> uses Vision AI to monitor and log staff adherence to separation protocols, including dedicated utensil usage and clean-down procedures.</p>
+                        </div>
+                    </div>
+                </article>
+            </main>
+
+            <!-- Right Column: Sidebar / Resource Library / Ads -->
+            <aside class="lg:w-1/4 pt-0 lg:pt-14 space-y-8">
+                <!-- Resource Library Menu -->
+                <div class="bg-afs-secondary-bg p-6 rounded-xl shadow-inner border border-gray-200">
+                    <h3 class="text-lg font-bold text-afs-primary mb-4">Neophyte Resource Hub</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="block hover:text-afs-accent">Guides & Whitepapers</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">Compliance Posters</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">Audit Templates</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">Fact Sheets</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">Video Tutorials</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">Food Recalls Alerts</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">Latest AI News</a></li>
+                    </ul>
+                </div>
+
+                <!-- Promotional CTA Box -->
+                <div class="bg-afs-primary text-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-3">Maximize Safety: Neophyte Compliance Suite</h3>
+                    <p class="text-sm mb-4 opacity-90">
+                        Get the full <strong>Neophyte Compliance Suite</strong> combining Vision AI, Ambient AI, and GPT intelligence for proactive food safety management.
+                    </p>
+                    <a href="/suite-demo" class="block text-center py-2 bg-white text-afs-primary font-bold rounded-lg hover:bg-gray-100 transition duration-150">
+                        Request a Demo
+                    </a>
+                </div>
+
+                <!-- Secondary Promo Box -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-700 mb-3">Staff Certification</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="block hover:text-afs-accent">AI-Powered Food Safety Training</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">Specialized Meat Compliance Certification</a></li>
+                        <li><a href="#" class="block hover:text-afs-accent">HACCP Fundamentals for FBOs</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 border-b border-gray-700 pb-8 mb-8">
+                <!-- Column 1: Courses -->
+                <div>
+                    <h4 class="font-bold text-white mb-4">Training Modules</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-afs-accent">Meat Compliance Certification</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">AI-Driven Food Handler</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">HACCP Manager Course</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2: Products -->
+                <div>
+                    <h4 class="font-bold text-white mb-4">Products & Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-afs-accent">Neophyte Compliance Suite</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">Sentinel AI</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">Neometry</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: About Us -->
+                <div>
+                    <h4 class="font-bold text-white mb-4">About Neophyte.ai</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-afs-accent">Our Mission</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">Media Center</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">Careers</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4: Legal -->
+                <div>
+                    <h4 class="font-bold text-white mb-4">Legal & Policies</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-afs-accent">Terms of Use</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-afs-accent">Security Policy</a></li>
+                    </ul>
+                </div>
+                <!-- Column 5: Login / Account Access -->
+                <div class="col-span-2 md:col-span-1">
+                    <h4 class="font-bold text-white mb-4">Account Access</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/staff-login" class="hover:text-afs-accent">FBO Staff Training Portal</a></li>
+                        <li><a href="/business-login" class="hover:text-afs-accent">Client Dashboard Access</a></li>
+                        <li><a href="/member-login" class="hover:text-afs-accent">Neophyte Resource Hub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact & Copyright Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+                <!-- Contact Details -->
+                <div>
+                    <h5 class="font-bold text-white mb-2">neo safemeat (A Neophyte.ai Solution)</h5>
+                    <p>Building 2, Level 10, Innovation Hub</p>
+                    <p>Mumbai, Maharashtra, 400701, India</p>
+                    <p class="mt-2">Ph: +91-2235987401</p>
+                    <p>Email: <a href="mailto:info@neosafemeat.com" class="hover:text-afs-accent">info@neosafemeat.com</a></p>
+                </div>
+
+                <!-- Copyright -->
+                <div class="md:col-span-2 mt-4 md:mt-0">
+                    <p class="text-gray-500 mb-4">Copyright &copy; 2025 Neophyte Ambient Intelligence Pvt Ltd. All Rights Reserved. <strong>neo safemeat</strong> and the Neophyte logo are trademarks of Neophyte Ambient Intelligence Pvt Ltd.</p>
+                    <p class="text-gray-500 text-xs">Food safety advice and recommendations should be considered a guide only. For authoritative guidance on food safety related issues please consult your local government agency or the relevant body for <strong>EU Regulation (EC) No 853/2004</strong>.</p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.linkedin.com/company/neophyte-ai/" class="text-gray-400 hover:text-afs-accent transition duration-150">
+                            <!-- LinkedIn Icon -->
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.784 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.529-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.75 7 2.457v6.778z"/></svg>
+                        </a>
+                        <!-- Add other social links as needed (e.g., Facebook, X/Twitter) -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
